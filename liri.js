@@ -49,8 +49,9 @@ prompt.get({
 			}
 		}, function(err, result){
 			userSelection = result.userSelection;
+			mySpotify();
 		});
-		mySpotify();
+
 	} else if(userInput == movies){
 		prompt.get({
 			properties: {
@@ -121,8 +122,18 @@ function myTwitter(){
 // if no song is provided then your program will default to
 // "what's my age again" by blink 182
 
-var mySpotify = function(music){
-
+function mySpotify(){
+	Spotify.search({ 
+		type: 'track', 
+		query: 'userSelection',
+	}, function(err, data) {
+	    if ( err ) {
+	        console.log('Error occurred: ' + err);
+	        return;
+	    }
+	 	console.log(data);
+	    // Do something with 'data' 
+	});
 }
 
 //movie omdb
