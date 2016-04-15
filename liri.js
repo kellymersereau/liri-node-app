@@ -143,7 +143,7 @@ function mySpotify(){
 function myMovies(type){
 	request('http://www.omdbapi.com/?t='+type+'&y=&plot=short&tomatoes=true&r=json', function (error, response, body) {
 		if(error) throw error;
-		// if(!error) {
+
 		json = JSON.parse(body);
 
 		console.log(colors.blue('Title: ') + json.Title);
@@ -157,7 +157,19 @@ function myMovies(type){
 		console.log(colors.blue('imdbRating: ') + json.imdbRating);
 		console.log(colors.blue('Rotten Tomatoes Rating: ') + json.tomatoRating);
 		console.log(colors.blue('Rotten Tomatoes URL: ') + json.tomatoURL);
-		// }
+
+		fs.appendFile("log.txt", "\n" + "Title: " + json.Title + "\n");
+		fs.appendFile("log.txt", "Year: " + json.Year + "\n");
+		fs.appendFile("log.txt", "Rated: " + json.Rated + "\n");
+		fs.appendFile("log.txt", "Country: " + json.Country + "\n");
+		fs.appendFile("log.txt", "Language: " + json.Language + "\n");
+		fs.appendFile("log.txt", "Director: " + json.Director + "\n");
+		fs.appendFile("log.txt", "Actors: " + json.Actors + "\n");
+		fs.appendFile("log.txt", "Plot: " + json.Plot + "\n");
+		fs.appendFile("log.txt", "imdbRating: " + json.imdbRating + "\n");
+		fs.appendFile("log.txt", "Rotten Tomatoes Rating: " + json.tomatoRating + "\n");
+		fs.appendFile("log.txt", "Rotten Tomatoes URL: " + json.tomatoURL + "\n");
+
 	})
 }
 
