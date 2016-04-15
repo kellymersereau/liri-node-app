@@ -10,11 +10,9 @@ var colors = require("colors/safe");
 
 //takes in the user input that calls the option you want
 var userInput = '';
-// process.argv[2];
 
 // //takes in the user input for the spotify & movie options
 var userSelection = '';
-// process.argv[3];
 
 //options that the user can choose from
 var myTweets = 'tweets';
@@ -41,17 +39,7 @@ prompt.get({
 	if(userInput == myTweets){
 		myTwitter();
 	} else if(userInput == songs){
-		prompt.get({
-			properties: {
-				userSelection: {
-					description: colors.green('What song do you want to look up?')
-				}
-			}
-		}, function(err, result){
-			userSelection = result.userSelection;
-			mySpotify();
-		});
-
+		mySpotify();
 	} else if(userInput == movies){
 		prompt.get({
 			properties: {
@@ -61,8 +49,8 @@ prompt.get({
 			}
 		}, function(err, result){
 			userSelection = result.userSelection;
+			myMovies(userSelection);
 		});
-		myMovies();
 	} else if(userInput == doWhat){
 		lastOption();
 	};
@@ -123,37 +111,54 @@ function myTwitter(){
 // "what's my age again" by blink 182
 
 function mySpotify(){
-	Spotify.search({ 
-		type: 'track', 
-		query: 'userSelection',
-	}, function(err, data) {
-	    if ( err ) {
-	        console.log('Error occurred: ' + err);
-	        return;
-	    }
-	 	console.log(data);
+	prompt.get({
+		properties: {
+			userSelection: {
+				description: colors.green('What song do you want to look up?')
+			}
+		}
+	}, function(err, result){
+		userSelection = result.userSelection;
+
+		if(result.userSelection === undefined){
+	 		userSelection = "What's my age again";
+	 	}
+
+		Spotify.search({ 
+			type: 'track', 
+			query: userSelection,
+		}, function(error, data) {
+		    if (error) throw error;
+
+		    console.log(data);
+	    	
+	    });
 	    // Do something with 'data' 
 	});
 }
 
 //movie omdb
-// node liri.js movie-this '<movie name here>'
-// this would output the following information to the terminal:
 
-// Title
-// Year
-// IMDB Rating
-// Country
-// Language
-// Plot
-// Actors
-// Rotten Tomatoes Rating
-// Rotton Tomatoes UrL
 
-// if no movie is provided then the program will output information for the movie: 'Mr. Nobody'
+function myMovies(type){
+	request('http://www.omdbapi.com/?t='+type+'&y=&plot=short&tomatoes=true&r=json', function (error, response, body) {
+		if(error) throw error;
+		// if(!error) {
+		json = JSON.parse(body);
 
-var myMovies = function(films){
-
+		console.log(colors.blue('Title: ') + json.Title);
+		console.log(colors.blue('Year: ') + json.Year);
+		console.log(colors.blue('Rated: ') + json.Rated);
+		console.log(colors.blue('Country: ') + json.Country);
+		console.log(colors.blue('Language: ') + json.Language);
+		console.log(colors.blue('Director: ') + json.Director);
+		console.log(colors.blue('Actors: ') + json.Actors);
+		console.log(colors.blue('Plot: ') + json.Plot);
+		console.log(colors.blue('imdbRating: ') + json.imdbRating);
+		console.log(colors.blue('Rotten Tomatoes Rating: ') + json.tomatoRating);
+		console.log(colors.blue('Rotten Tomatoes URL: ') + json.tomatoURL);
+		// }
+	})
 }
 
 //final option
