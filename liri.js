@@ -1,6 +1,8 @@
+//variables to call the information from the keys.js file which stores the twitter access keys needed for the twitter option of this app
 var keys = require('./keys.js');
 var twitterKeys = keys.twitterKeys;
 
+//sets up the variables of all of the different things required to properly run this node app
 var fs = require('fs');
 var prompt = require('prompt');
 var Twitter = require('twitter');
@@ -26,7 +28,7 @@ prompt.message = colors.blue("Type one of the following: tweets, spotify-this-so
 prompt.delimiter = colors.cyan("\n");
 
 prompt.start();
-//tell user what to type to get the information
+//asks the user what option they have chosen from the information given in the prompt message
 prompt.get({
 	properties: {
 		userInput: {
@@ -75,6 +77,7 @@ prompt.get({
 			}
 			myMovies(userSelection);
 		});
+	//if the user chooses 'surprise' then the function lastOption is run using the information from the random.txt file
 	} else if(userInput == doWhat){
 		lastOption();
 	};
@@ -102,21 +105,22 @@ function myTwitter(){
 	client.get('statuses/user_timeline', params, function(error, timeline, response){
 		if(!error){
 			for(tweet in timeline){
+				//this creates the variable tdate which will store the result of the date from the twitter call for easier access later
 				var tDate = new Date(timeline[tweet].created_at);
 
+				//console.log all of the tweets organizing them by tweet# followed by the date of the tweet and finally the text of the tweet itself
 				console.log("Tweet #: " + (parseInt(tweet)+1) + " ");
 				console.log(tDate.toString().slice(0, 24) + " ");
 				console.log(timeline[tweet].text);
 				console.log("\n");
 
-				fs.appendFile('log.txt', "Tweet #: " + (parseInt(tweet)+1) + " ");
-				fs.appendFile('log.txt', timeline[tweet].text);
+				//append all of this information to the txt file 
+				fs.appendFile('log.txt', "Tweet #: " + (parseInt(tweet)+1) + "\n");
+				fs.appendFile('log.txt', timeline[tweet].text + "\n");
 				fs.appendFile('log.txt', "\n");
 
 			}
-		} else{
-			console.log(error);
-		}
+		} 
 	})
 
 }
@@ -138,14 +142,14 @@ function mySpotify(userSelection){
 		    	    console.log(colors.green("Artist: ") + music[i].artists[j].name);
 		        	console.log(colors.green("Song Name: ") + music[i].name);
 		        	console.log(colors.green("Preview Link of the song from Spotify: ") + music[i].preview_url);
-		        	console.log(colors.green("Album Name: ") + music[i].album.name);
+		        	console.log(colors.green("Album Name: ") + music[i].album.name + "\n");
 		    	//this appends the data we receive from the spotify API to the log.txt file
-			   	    fs.appendFile('log.txt', "Artist: " + music[i].artists[j].name);
-			   	    	}
-			       	fs.appendFile('log.txt', "Song Name: " + music[i].name);
-			       	fs.appendFile('log.txt', "Preview Link of the song from Spotify: " + music[i].preview_url);
-			       	fs.appendFile('log.txt', "Album Name: " + music[i].album.name);
-			   		fs.appendFile("\n");
+		    		fs.appendFile('log.txt', "\n");
+			   	    fs.appendFile('log.txt', "Artist: " + music[i].artists[j].name + "\n")
+			       	fs.appendFile('log.txt', "Song Name: " + music[i].name + "\n");
+			       	fs.appendFile('log.txt', "Preview Link of the song from Spotify: " + music[i].preview_url + "\n");
+			       	fs.appendFile('log.txt', "Album Name: " + music[i].album.name + "\n");
+			       	fs.appendFile('log.txt', "\n");
 		    	}
 		    }
 	});
@@ -155,11 +159,12 @@ function mySpotify(userSelection){
 
 
 function myMovies(type){
+	//use request to access the omdb api and input the type variable that is defined above as the movie we are searching for
 	request('http://www.omdbapi.com/?t='+type+'&y=&plot=short&tomatoes=true&r=json', function (error, response, body) {
 		if(error) throw error;
-
+		//JSON.parse the body of the result and store it in the variable json for easier access
 		json = JSON.parse(body);
-
+		//console.log each of the different things we need to get from the omdb api and add a title for each item and use the colors npm to make the title name a different color than the result for better user access
 		console.log(colors.blue('Title: ') + json.Title);
 		console.log(colors.blue('Year: ') + json.Year);
 		console.log(colors.blue('Rated: ') + json.Rated);
@@ -172,6 +177,8 @@ function myMovies(type){
 		console.log(colors.blue('Rotten Tomatoes Rating: ') + json.tomatoRating);
 		console.log(colors.blue('Rotten Tomatoes URL: ') + json.tomatoURL);
 
+		//append the results to the log.txt file
+		fs.appendFile('log.txt', "\n");
 		fs.appendFile("log.txt", "\n" + "Title: " + json.Title + "\n");
 		fs.appendFile("log.txt", "Year: " + json.Year + "\n");
 		fs.appendFile("log.txt", "Rated: " + json.Rated + "\n");
@@ -187,16 +194,17 @@ function myMovies(type){
 	})
 }
 
-//final option
-// node liri.js do-what-it-says 
-// Using the fs package in node, the program would take the text inside of random.txt and use it to call the first command with the second part as it's parameter
 
-// Currently in random.txt, the following text is there:
-
-// spotify-this-song,"I Want it That Way"
-// so according to those instructions, you would call the appropriate function and pass in "I Want it That Way" as the song.
-
-// This should work for any function and paramter you use.
+//final option aka surprise
 var lastOption = function(last){
-
+	//reads the information from the random.txt file to get the information needed for this function
+	fs.readFile('random.txt', 'utf-8', function(err, data){
+		//split the data by the comma so you can access the first part which is which type of search we are doing and the second part which is the userSelection of what we are looking up
+		var things = data.split(',');
+		//pass this information into the spotify function and run the userSelection through to get the results.  this will automatically console.log the info and then append the info into the txt file
+		if(things[0] === songs){
+			userSelection = things[1];
+			mySpotify(userSelection);
+		}
+	})
 }
