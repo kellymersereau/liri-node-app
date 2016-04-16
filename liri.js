@@ -16,13 +16,13 @@ var userSelection = '';
 
 //options that the user can choose from
 var myTweets = 'tweets';
-var songs = 'spotify';
+var songs = 'spotify-this-song';
 var movies = 'movie';
 var doWhat = 'surprise';
 
 //prompt start
 
-prompt.message = colors.blue("Type one of the following: tweets, spotify, movie, or surprise");
+prompt.message = colors.blue("Type one of the following: tweets, spotify-this-song, movie, or surprise");
 prompt.delimiter = colors.cyan("\n");
 
 prompt.start();
@@ -36,11 +36,31 @@ prompt.get({
 }, function(err, result){
 	userInput = result.userInput;
 	//based on what the user inputs different things are done
+
+	//if user enters tweets it will run the myTwitter function
 	if(userInput == myTweets){
 		myTwitter();
-	} else if(userInput == songs){
-		mySpotify();
-	} else if(userInput == movies){
+	} 
+	//if the user enters spotify-this-song it will prompt you and ask for the song you want to look up and then it will run the mySpotify function based on those results. if the user doesnt enter a song it defaults to whats my age again and gets that information
+	else if(userInput == songs){
+		prompt.get({
+			properties: {
+				userSelection: {
+					description: colors.green('What song do you want to look up?')
+				}
+			}
+		}, function(err, result){
+
+			if(result.userSelection === ""){
+				userSelection = "what's my age again";
+			} else{
+				userSelection = result.userSelection;
+			}
+			mySpotify(userSelection);
+		});
+	} 
+	// if the user selects movie it will prompt the user to state what movie they want to look up and then it will get that information from omdb api if the prompt is left blank the function will default and look up Mr Nobody and reutrn that information
+	else if(userInput == movies){
 		prompt.get({
 			properties: {
 				userSelection: {
@@ -48,7 +68,11 @@ prompt.get({
 				}
 			}
 		}, function(err, result){
-			userSelection = result.userSelection;
+			if(result.userSelection === ""){
+				userSelection = "Mr. Nobody";
+			} else{
+				userSelection = result.userSelection;
+			}
 			myMovies(userSelection);
 		});
 	} else if(userInput == doWhat){
@@ -58,25 +82,23 @@ prompt.get({
 
 
 
-//twitter
-
-// node liri.js my-tweets
-// will show your last 20 tweets and when they were created at in the terminal
-
-
+//twitter function
 function myTwitter(){
+	//this assigns the variable client to get the information from the twitterKeys variable set above so we can access twitters information
 	var client = new Twitter({
 		consumer_key: twitterKeys.consumer_key,
 		consumer_secret: twitterKeys.consumer_secret,
 		access_token_key: twitterKeys.access_token_key,
 		access_token_secret: twitterKeys.access_token_secret,
 	});
+	//this sets the variable params to search the username kellsbellslovee and only return back the last 20 tweets and then it doesn't trim the username so the username information will come up instead of the twitter id#
 	var params = {
 		screen_name: 'kellsbellslovee',
 		count: '20',
 		trim_user: false,
 	}
 
+	// this is the call to twitter, it gets the statuses/user timeline from twitter based on the params set above
 	client.get('statuses/user_timeline', params, function(error, timeline, response){
 		if(!error){
 			for(tweet in timeline){
@@ -99,41 +121,33 @@ function myTwitter(){
 
 }
 
-//spotify
-// node liri.js spotify-this-song '<song name here>'
-// shows the following information about the song in the terminal
-// artist(s)
-// song name
-// preview link of the song from spotify
-// album that the song is a part of
-// song name
-// if no song is provided then your program will default to
-// "what's my age again" by blink 182
+//spotify function
 
-function mySpotify(){
-	prompt.get({
-		properties: {
-			userSelection: {
-				description: colors.green('What song do you want to look up?')
-			}
-		}
-	}, function(err, result){
-		userSelection = result.userSelection;
-
-		if(result.userSelection === undefined){
-	 		userSelection = "What's my age again";
-	 	}
-
-		Spotify.search({ 
-			type: 'track', 
-			query: userSelection,
-		}, function(error, data) {
-		    if (error) throw error;
-
-		    console.log(data);
-	    	
-	    });
-	    // Do something with 'data' 
+function mySpotify(userSelection){
+	//this starts the search within spotify for the track and the query based on the userselection set in the if/else statement above.  if there is an error it throws the error and continues getting the information.  
+	Spotify.search({ 
+		type: 'track', 
+		query: userSelection
+	}, function(err, data) {
+	    if (err) throw err;
+	    //this sets the variable music to get the initial information from the object, just so it's easier to call in the for loop below
+		var music = data.tracks.items;
+		//this loops through the object that we get from spotify and then loops through each objects information to get what we need from spotify
+		    for (var i = 0; i<music.length; i++){
+		    	for (j=0; j<music[i].artists.length; j++){
+		    	    console.log(colors.green("Artist: ") + music[i].artists[j].name);
+		        	console.log(colors.green("Song Name: ") + music[i].name);
+		        	console.log(colors.green("Preview Link of the song from Spotify: ") + music[i].preview_url);
+		        	console.log(colors.green("Album Name: ") + music[i].album.name);
+		    	//this appends the data we receive from the spotify API to the log.txt file
+			   	    fs.appendFile('log.txt', "Artist: " + music[i].artists[j].name);
+			   	    	}
+			       	fs.appendFile('log.txt', "Song Name: " + music[i].name);
+			       	fs.appendFile('log.txt', "Preview Link of the song from Spotify: " + music[i].preview_url);
+			       	fs.appendFile('log.txt', "Album Name: " + music[i].album.name);
+			   		fs.appendFile("\n");
+		    	}
+		    }
 	});
 }
 

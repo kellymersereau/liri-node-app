@@ -10,3 +10,15 @@ Plot: Attempting to cope with her mother's murder, Sidney and her horror movie-o
 imdbRating: 7.2
 Rotten Tomatoes Rating: 7.0
 Rotten Tomatoes URL: http://www.rottentomatoes.com/m/1074316-scream/
+
+Title: Scream
+Year: 1996
+Rated: R
+Country: USA
+Language: English
+Director: Wes Craven
+Actors: Drew Barrymore, Roger Jackson, Kevin Patrick Walls, David Booth
+Plot: Attempting to cope with her mother's murder, Sidney and her horror movie-obsessed friends are stalked by a murderer who seems to have a hard time letting the past go.
+imdbRating: 7.2
+Rotten Tomatoes Rating: 7.0
+Rotten Tomatoes URL: http://www.rottentomatoes.com/m/1074316-scream/
