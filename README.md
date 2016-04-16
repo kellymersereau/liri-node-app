@@ -5,7 +5,7 @@
 
 #### Categories users can search from 
 - **Twitter**
-	* This allows the user to access the latest 20 tweets from my [Twitter](www.twitter.com/kellsbellslovee)
+	* This allows the user to access the latest 20 tweets from my [Twitter](https://www.twitter.com/kellsbellslovee/)
 - **Spotify**
 	* This allows the user to search for a song and access information about that song from Spotify
 - **OMDB**
