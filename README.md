@@ -1,8 +1,8 @@
 # liri-node-app
 
-###LIRI is a command line node app that allows users to choose what category of data they wish to look up and what to look up under each category
+##LIRI is a command line node app that allows users to choose what category of data they wish to look up and what to look up under each category
 
-#### * * Categories users can search from * *
+#### Categories users can search from 
 - **Twitter**
 	* This allows the user to access the latest 20 tweets from my [twitter](www.twitter.com/kellsbellslovee)
 - **Spotify**
@@ -11,7 +11,7 @@
 	* This allows the user to search for a movie title and return specific IMDB information about that movie
 
 
-#### * * NPM Packages Used * * 
+#### NPM Packages Used 
 - **fs**
 	* used to log all information searched in the log.txt file to allow the user to reference this information at a later time
 - **Prompt**
