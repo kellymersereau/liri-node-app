@@ -1,0 +1,112 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'colors/safe',
+1 verbose cli   '--save' ]
+2 info using npm@2.15.9
+3 info using node@v4.6.0
+4 verbose install initial load of /Users/kmerseraeu/Desktop/tutoring/liri/liri-node-app/package.json
+5 verbose installManyTop reading scoped package data from /Users/kmerseraeu/Desktop/tutoring/liri/liri-node-app/node_modules/fs/package.json
+6 verbose installManyTop reading scoped package data from /Users/kmerseraeu/Desktop/tutoring/liri/liri-node-app/node_modules/prompt/package.json
+7 verbose installManyTop reading scoped package data from /Users/kmerseraeu/Desktop/tutoring/liri/liri-node-app/node_modules/request/package.json
+8 verbose installManyTop reading scoped package data from /Users/kmerseraeu/Desktop/tutoring/liri/liri-node-app/node_modules/spotify/package.json
+9 verbose installManyTop reading scoped package data from /Users/kmerseraeu/Desktop/tutoring/liri/liri-node-app/node_modules/twitter/package.json
+10 info package.json fs@0.0.2 fs is also the name of a node core module.
+11 info package.json fs@0.0.2 No description
+12 info package.json fs@0.0.2 No repository field.
+13 info package.json fs@0.0.2 No README data
+14 info package.json spotify@0.3.0 No license field.
+15 verbose readDependencies loading dependencies from /Users/kmerseraeu/Desktop/tutoring/liri/liri-node-app/package.json
+16 silly cache add args [ 'colors/safe', null ]
+17 verbose cache add spec colors/safe
+18 silly cache add parsed spec Result {
+18 silly cache add   raw: 'colors/safe',
+18 silly cache add   scope: null,
+18 silly cache add   name: null,
+18 silly cache add   rawSpec: 'colors/safe',
+18 silly cache add   spec: 'github:colors/safe',
+18 silly cache add   type: 'hosted',
+18 silly cache add   hosted:
+18 silly cache add    { type: 'github',
+18 silly cache add      ssh: 'git@github.com:colors/safe.git',
+18 silly cache add      sshUrl: 'git+ssh://git@github.com/colors/safe.git',
+18 silly cache add      httpsUrl: 'git+https://github.com/colors/safe.git',
+18 silly cache add      gitUrl: 'git://github.com/colors/safe.git',
+18 silly cache add      shortcut: 'github:colors/safe',
+18 silly cache add      directUrl: 'https://raw.githubusercontent.com/colors/safe/master/package.json' } }
+19 verbose addRemoteGit caching colors/safe
+20 verbose addRemoteGit colors/safe is a repository hosted by github
+21 silly tryGitProto attempting to clone git://github.com/colors/safe.git
+22 silly tryClone cloning colors/safe via git://github.com/colors/safe.git
+23 verbose tryClone git-github-com-colors-safe-git-56623ac7 not in flight; caching
+24 verbose correctMkdir /Users/kmerseraeu/.npm/_git-remotes correctMkdir not in flight; initializing
+25 verbose makeDirectory /Users/kmerseraeu/.npm/_git-remotes creation not in flight; initializing
+26 silly makeDirectory /Users/kmerseraeu/.npm/_git-remotes uid: 502 gid: 20
+27 info git [ 'clone',
+27 info git   '--template=/Users/kmerseraeu/.npm/_git-remotes/_templates',
+27 info git   '--mirror',
+27 info git   'git://github.com/colors/safe.git',
+27 info git   '/Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-56623ac7' ]
+28 verbose git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror git://github.com/colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-56623ac7: Cloning into bare repository '/Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-56623ac7'...
+28 verbose git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror git://github.com/colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-56623ac7: fatal: remote error:
+28 verbose git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror git://github.com/colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-56623ac7:   Repository not found.
+29 silly tryHTTPS attempting to clone git+https://github.com/colors/safe.git
+30 silly tryClone cloning colors/safe via git+https://github.com/colors/safe.git
+31 verbose tryClone https-github-com-colors-safe-git-bf279890 not in flight; caching
+32 verbose correctMkdir /Users/kmerseraeu/.npm/_git-remotes correctMkdir not in flight; initializing
+33 info git [ 'clone',
+33 info git   '--template=/Users/kmerseraeu/.npm/_git-remotes/_templates',
+33 info git   '--mirror',
+33 info git   'https://github.com/colors/safe.git',
+33 info git   '/Users/kmerseraeu/.npm/_git-remotes/https-github-com-colors-safe-git-bf279890' ]
+34 verbose git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror https://github.com/colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/https-github-com-colors-safe-git-bf279890: Cloning into bare repository '/Users/kmerseraeu/.npm/_git-remotes/https-github-com-colors-safe-git-bf279890'...
+34 verbose git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror https://github.com/colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/https-github-com-colors-safe-git-bf279890: remote: Invalid username or password.
+34 verbose git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror https://github.com/colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/https-github-com-colors-safe-git-bf279890: fatal: Authentication failed for 'https://github.com/colors/safe.git/'
+35 silly trySSH attempting to clone git@github.com:colors/safe.git
+36 silly tryClone cloning colors/safe via git@github.com:colors/safe.git
+37 verbose tryClone git-github-com-colors-safe-git-c655219f not in flight; caching
+38 verbose correctMkdir /Users/kmerseraeu/.npm/_git-remotes correctMkdir not in flight; initializing
+39 info git [ 'clone',
+39 info git   '--template=/Users/kmerseraeu/.npm/_git-remotes/_templates',
+39 info git   '--mirror',
+39 info git   'git@github.com:colors/safe.git',
+39 info git   '/Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-c655219f' ]
+40 error git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror git@github.com:colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-c655219f: Cloning into bare repository '/Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-c655219f'...
+40 error git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror git@github.com:colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-c655219f: ERROR: Repository not found.
+40 error git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror git@github.com:colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-c655219f: fatal: Could not read from remote repository.
+40 error git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror git@github.com:colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-c655219f:
+40 error git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror git@github.com:colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-c655219f: Please make sure you have the correct access rights
+40 error git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror git@github.com:colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-c655219f: and the repository exists.
+41 verbose stack Error: Command failed: git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror git@github.com:colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-c655219f
+41 verbose stack Cloning into bare repository '/Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-c655219f'...
+41 verbose stack ERROR: Repository not found.
+41 verbose stack fatal: Could not read from remote repository.
+41 verbose stack
+41 verbose stack Please make sure you have the correct access rights
+41 verbose stack and the repository exists.
+41 verbose stack
+41 verbose stack     at ChildProcess.exithandler (child_process.js:213:12)
+41 verbose stack     at emitTwo (events.js:87:13)
+41 verbose stack     at ChildProcess.emit (events.js:172:7)
+41 verbose stack     at maybeClose (internal/child_process.js:829:16)
+41 verbose stack     at Socket.<anonymous> (internal/child_process.js:319:11)
+41 verbose stack     at emitOne (events.js:77:13)
+41 verbose stack     at Socket.emit (events.js:169:7)
+41 verbose stack     at Pipe._onclose (net.js:486:12)
+42 verbose cwd /Users/kmerseraeu/Desktop/tutoring/liri/liri-node-app
+43 error Darwin 16.3.0
+44 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "colors/safe" "--save"
+45 error node v4.6.0
+46 error npm  v2.15.9
+47 error code 128
+48 error Command failed: git clone --template=/Users/kmerseraeu/.npm/_git-remotes/_templates --mirror git@github.com:colors/safe.git /Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-c655219f
+48 error Cloning into bare repository '/Users/kmerseraeu/.npm/_git-remotes/git-github-com-colors-safe-git-c655219f'...
+48 error ERROR: Repository not found.
+48 error fatal: Could not read from remote repository.
+48 error
+48 error Please make sure you have the correct access rights
+48 error and the repository exists.
+49 error If you need help, you may report this error at:
+49 error     <https://github.com/npm/npm/issues>
+50 verbose exit [ 1, true ]
